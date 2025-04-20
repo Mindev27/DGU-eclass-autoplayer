@@ -24,7 +24,7 @@ git clone https://github.com/Mindev27/eclass-autoplayer.git
 
 ## 사용 방법
 
-1. 동국대학교 이클래스(https://eclass.dongguk.edu)에 로그인합니다.
+1. 동국대학교 이클래스(`https://eclass.dongguk.edu`)에 로그인합니다.
 
 2. 강의 목록 페이지에서 우측 하단의 "강의 페이지 열기" 버튼을 클릭하면 자동으로 현재 주차의 동영상이 재생됩니다.
 
