@@ -112,7 +112,7 @@ const findCurrentWeekVideos = () => {
         const videos = Array.from(videoModules).map((module, index) => {
           const moduleId = module.id.replace('module-', '');
           const videoName = module.querySelector('.instancename')?.textContent.trim() || '이름 없는 동영상';
-          const videoUrl = `https://eclass.dongguk.edu/mod/vod/view.php?id=${moduleId}`;
+          const videoUrl = `https://eclass.dongguk.edu/mod/vod/view.php?id=${moduleId}&macro=true`;
           
           log(`- 동영상 ${index + 1}: ${videoName} (ID: ${moduleId})`);
           log(`  URL: ${videoUrl}`);
