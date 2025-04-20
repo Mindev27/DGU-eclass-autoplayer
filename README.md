@@ -13,7 +13,7 @@
 
 1. 이 저장소를 클론 또는 다운로드합니다.
 ```bash
-git clone https://github.com/[username]/eclass-autoplayer.git
+git clone https://github.com/Mindev27/eclass-autoplayer.git
 ```
 
 2. Chrome 브라우저에서 `chrome://extensions`로 이동합니다.
