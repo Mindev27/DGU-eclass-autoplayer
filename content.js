@@ -274,14 +274,9 @@ window.addEventListener('load', async () => {
     // 각 동영상 모듈에 대한 정보 출력
     videoModules.forEach((module, index) => {
       const moduleId = module.id.replace('module-', '');
-      const videoName = module.querySelector('.instancename')?.textContent.trim() || '이름 없는 동영상';
-      const videoUrl = `https://eclass.dongguk.edu/mod/vod/viewer.php?id=${moduleId}`;
-      log(`- 동영상 ${index + 1}: ${videoName} (ID: ${moduleId})`);
-      console.log(videoUrl);
-      chrome.runtime.sendMessage({
-        type: 'OPEN_VIDEO_WINDOW',
-        url: videoUrl
-      });
+      const videoUrl = `https://eclass.dongguk.edu/mod/vod/viewer.php?id=${moduleId}#play=${moduleId}`;
+      
+      chrome.runtime.sendMessage({ type: 'OPEN_VIDEO_WINDOW', url: videoUrl });
     });
 
     chrome.runtime.sendMessage({ type: 'CLOSE_COURSE_TAB' });

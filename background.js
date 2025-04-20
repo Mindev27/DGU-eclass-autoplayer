@@ -17,17 +17,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       return true; // 비동기 응답
 
     case 'OPEN_VIDEO_WINDOW':
-      if (message.url) {
-        chrome.windows.create({
-          url: message.url,
-          state: 'minimized',
-          focused: false
-        });
-      }
+      chrome.windows.create({
+        url: message.url,
+        state: 'minimized',
+        focused: false
+      });
       break;
 
     case 'CLOSE_COURSE_TAB':
-      if (sender.tab && sender.tab.id) {
+      if (sender.tab?.id) {
         chrome.tabs.remove(sender.tab.id);
       }
       break;
