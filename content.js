@@ -43,7 +43,7 @@ const findCourseLinks = () => {
       try {
         const url = new URL(href);
         const id = url.searchParams.get('id');
-        const fullUrl = id ? `https://eclass.dongguk.edu/course/view.php?id=${id}` : null;
+        const fullUrl = id ? `https://eclass.dongguk.edu/course/view.php?id=${id}&macro=true` : null;
         
         const courseInfo = {
           index: index + 1,
@@ -94,6 +94,11 @@ const waitForElement = (selector, maxAttempts = 5) => {
       }
     }, 500);
   });
+};
+
+// 매크로 모드 확인 함수
+const isMacroMode = () => {
+  return new URLSearchParams(window.location.search).has('macro');
 };
 
 // 현재 주차의 동영상 요소 찾기
@@ -249,7 +254,10 @@ window.addEventListener('load', async () => {
     const mainContent = await waitForElement('.course-content');
     if (!mainContent) {
       log('강의 컨텐츠를 찾을 수 없음');
-      chrome.runtime.sendMessage({ type: 'CLOSE_COURSE_TAB' });
+      // 매크로 모드일 때만 탭 닫기
+      if (isMacroMode()) {
+        chrome.runtime.sendMessage({ type: 'CLOSE_COURSE_TAB' });
+      }
       return;
     }
     
@@ -257,7 +265,10 @@ window.addEventListener('load', async () => {
     const visibleSection = await waitForElement('li.section.main[style=""]');
     if (!visibleSection) {
       log('현재 주차를 찾을 수 없음');
-      chrome.runtime.sendMessage({ type: 'CLOSE_COURSE_TAB' });
+      // 매크로 모드일 때만 탭 닫기
+      if (isMacroMode()) {
+        chrome.runtime.sendMessage({ type: 'CLOSE_COURSE_TAB' });
+      }
       return;
     }
     
@@ -265,7 +276,10 @@ window.addEventListener('load', async () => {
     const videoModules = visibleSection.querySelectorAll('.activity.vod.modtype_vod');
     if (videoModules.length === 0) {
       log('현재 주차에서 동영상을 찾을 수 없음');
-      chrome.runtime.sendMessage({ type: 'CLOSE_COURSE_TAB' });
+      // 매크로 모드일 때만 탭 닫기
+      if (isMacroMode()) {
+        chrome.runtime.sendMessage({ type: 'CLOSE_COURSE_TAB' });
+      }
       return;
     }
     
@@ -279,8 +293,10 @@ window.addEventListener('load', async () => {
       chrome.runtime.sendMessage({ type: 'OPEN_VIDEO_WINDOW', url: videoUrl });
     });
 
-    chrome.runtime.sendMessage({ type: 'CLOSE_COURSE_TAB' });
-    
+    // 매크로 모드일 때만 탭 닫기
+    if (isMacroMode()) {
+      chrome.runtime.sendMessage({ type: 'CLOSE_COURSE_TAB' });
+    }
   }
 });
 
