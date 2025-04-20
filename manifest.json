@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "E-Class Auto Player",
+  "version": "0.6.0",
+  "description": "동국대학교 이클래스 동영상 자동 재생 확장프로그램",
+  "permissions": ["tabs","storage","scripting","tabs"],
+  "host_permissions": [
+    "https://eclass.dongguk.edu/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://eclass.dongguk.edu/*"],
+      "js": ["content.js"]
+    },
+    {
+      "matches": ["https://eclass.dongguk.edu/mod/vod/viewer.php*"],
+      "js": ["autoplay.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
