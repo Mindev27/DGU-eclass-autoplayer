@@ -117,7 +117,7 @@ const findCurrentWeekVideos = () => {
         const videos = Array.from(videoModules).map((module, index) => {
           const moduleId = module.id.replace('module-', '');
           const videoName = module.querySelector('.instancename')?.textContent.trim() || '이름 없는 동영상';
-          const videoUrl = `https://eclass.dongguk.edu/mod/vod/view.php?id=${moduleId}&macro=true`;
+          const videoUrl = `https://eclass.dongguk.edu/mod/vod/viewer.php?id=${moduleId}&macro=true#play=${moduleId}`;
           
           log(`- 동영상 ${index + 1}: ${videoName} (ID: ${moduleId})`);
           log(`  URL: ${videoUrl}`);
@@ -288,7 +288,7 @@ window.addEventListener('load', async () => {
     // 각 동영상 모듈에 대한 정보 출력
     videoModules.forEach((module, index) => {
       const moduleId = module.id.replace('module-', '');
-      const videoUrl = `https://eclass.dongguk.edu/mod/vod/viewer.php?id=${moduleId}#play=${moduleId}`;
+      const videoUrl = `https://eclass.dongguk.edu/mod/vod/viewer.php?id=${moduleId}&macro=true#play=${moduleId}`;
       
       chrome.runtime.sendMessage({ type: 'OPEN_VIDEO_WINDOW', url: videoUrl });
     });
