@@ -245,9 +245,9 @@ window.addEventListener('load', async () => {
     // 리스트 페이지인 경우 Start 버튼 생성
     log('강의 목록 페이지 감지');
     createStartButton();
-  } else if (window.location.href.includes('/course/view.php')) {
-    // 강의 페이지인 경우 동영상 찾기 시작
-    log('강의 페이지 감지');
+  } else if (window.location.href.includes('/course/view.php') && isMacroMode()) {
+    // 강의 페이지이고 매크로 모드인 경우에만 동영상 찾기 시작
+    log('매크로 모드의 강의 페이지 감지');
     
     // DOM이 완전히 로드될 때까지 대기
     log('DOM 로드 대기 중...');
